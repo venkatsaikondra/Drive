@@ -4,6 +4,9 @@ const { body, validationResult } = require('express-validator');
 const dotenv = require('dotenv');
 const bcrypt = require('bcrypt');
 const userModel = require('../models/user.model');
+const indexRouter = require('./index.routes');
+
+const jwt = require('jsonwebtoken');
 dotenv.config();
 
 router.get('/register', (req, res) => {
@@ -39,6 +42,36 @@ router.post('/register',
         } catch (err) {
             return res.status(500).render('register', { error: 'Server error' });
         }
+    }  
+);
+router.get('/login', (req, res) => {
+    res.render('login');
+});
+router.post('/login',
+    body('email').trim().isEmail().withMessage('Invalid email address'),
+    body('password').notEmpty().withMessage('Password is required'),
+    async (req, res) => {
+        const { email, password } = req.body;
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).render('login', { error: errors.array()[0].msg });
+        }
+        try {
+            const user = await userModel.findOne({ email });
+            if (!user) {
+                return res.status(400).render('login', { error: 'Invalid email or password' });
+            }
+            const isMatch = await bcrypt.compare(password, user.password);
+            if (!isMatch) {
+                return res.status(400).render('login', { error: 'Invalid email or password' });
+            }
+            // Optionally, set a session or JWT here
+            return res.render('login', { success: 'Logged in successfully!' });
+        } catch (err) {
+            return res.status(500).render('login', { error: 'Server error' });
+        }
+        res.cookie('token',token)
+        res.send('Logged in successfully');
     }
 );
 

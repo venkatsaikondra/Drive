@@ -35,7 +35,7 @@
             <div class="text-sm text-gray-500 dark:text-gray-300">Secure file storage — create your free account</div>
           </div>
         </div>
-  <div class="text-sm text-gray-600 dark:text-gray-400 mt-4 sm:mt-0">Already have an account? <a href="/user/login" class="text-blue-600 hover:underline">Sign in</a></div>
+        <div class="text-sm text-gray-600 dark:text-gray-400 mt-4 sm:mt-0">Already have an account? <a href="/" class="text-blue-600 hover:underline">Sign in</a></div>
       </div>
 
       <% if (typeof error !== 'undefined' && error) { %>
@@ -45,19 +45,12 @@
         <div class="mb-4 p-3 rounded bg-green-50 border border-green-100 text-green-700"><%= success %></div>
       <% } %>
 
-      <form class="space-y-6" action="/user/register" method="POST" novalidate>
+      <form class="space-y-6" action="/user/login" method="POST" novalidate>
 
         <div class="grid gap-6 md:grid-cols-2">
           <div>
             <label for="username" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-200">Username</label>
             <input name="username" id="username" type="text" required placeholder="Your username"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
-          </div>
-
-          
-          <div>
-            <label for="phone" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-200">Phone</label>
-            <input name="phone" id="phone" type="tel" placeholder="(555) 555-5555"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-blue-200 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white" />
           </div>
 
