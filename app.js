@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 const userRouter = require('./routes/user.routes');
 app.use('/user', userRouter);
 app.use('/', indexRouter);
-
+app.use('/users', userRouter);
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
